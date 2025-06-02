@@ -1,4 +1,4 @@
-# Sch1d_solution.py : observation de la propagation d’un paquet d’ondes 
+# Sch1d_solution.py : observation de la propagation d'un paquet d'ondes 
 
 import numpy as np
 import math
