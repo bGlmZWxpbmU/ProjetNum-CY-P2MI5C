@@ -21,8 +21,8 @@ def get_inputs():
     
     # Paramètres spatiaux
     print("\n--- Paramètres spatiaux ---")
-    dx = float(input("Pas spatial dx (m) [valeur positive, ex: 0.001]: ") or 0.001)
-    L_total = float(input("Longueur totale du domaine L (m) [valeur positive, ex: 2]: ") or 2.0)
+    dx = float(input("Pas spatial (m) [valeur positive, ex: 0.001]: ") or 0.001)
+    L_total = float(input("Longueur totale du domaine (m) [valeur positive, ex: 2]: ") or 2.0)
     nx = int(L_total / dx)
     
     # Paramètres du paquet d'ondes
@@ -31,7 +31,7 @@ def get_inputs():
     sigma = float(input("Largeur du paquet (m) [valeur positive, ex: 0.05]: ") or 0.05)
     
     # Paramètres du potentiel
-    v0 = -5000  # Potentiel de référence (eV)
+    v0 = 5000  # Potentiel de référence (eV)
     e = 5  # Rapport E/V0 de référence
     E = e * v0  # Énergie calculée (eV)
     
@@ -57,16 +57,16 @@ start_time = time.time()
 
 # Calculs des paramètres (simulation de l'équation de Schrödinger dépendante du temps)
 s = dt / (dx**2)
-k = math.sqrt(2 * abs(E))  # Nombre d'onde (m^-1)
+k = math.sqrt(2 * E)  # Nombre d'onde (m^-1)
 A = 1 / (math.sqrt(sigma * math.sqrt(math.pi)))  # Constante de normalisation (m^-1/2)
 e = E / v0 # Rapport E/V0
 
 # Initialisation des grilles
 x_grid = np.linspace(0, (nx - 1) * dx, nx)  # Grille spatiale (m)
-V = np.zeros(nx)  # Potentiel (eV)
+V = np.zeros(nx)  # Affichage du potentiel
 
 # Définition du potentiel dans la région spécifiée
-V[(x_grid >= x_debut) & (x_grid <= x_fin)] = v0
+V[(x_grid >= x_debut) & (x_grid <= x_fin)] = -v0
 
 # Fonction d'onde complexe
 psi = A * np.exp(1j * k * x_grid - ((x_grid - xc) ** 2) / (2 * (sigma ** 2)))
@@ -150,6 +150,7 @@ ani.save(file_path, writer = animation.FFMpegWriter(fps=120, bitrate=5000))
 # Temps d'exécution
 end_time = time.time()
 elapsed_time = end_time - start_time
-print(f"\nSuccès. Temps d'exécution total: {elapsed_time:.2f} secondes")
+print("\nSimulation enregistrée avec succès.")
+print(f"\nTemps d'exécution: {elapsed_time:.2f} secondes")
 
 plt.show()
