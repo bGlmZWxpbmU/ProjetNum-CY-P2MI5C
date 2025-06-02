@@ -9,8 +9,6 @@ import os
 
 # Collecte les paramètres de simulation dans le terminal
 def get_inputs():
-    print("--- Simulation de paquet d'ondes ---\n")
-    
     # Paramètres temporels
     print("--- Paramètres temporels ---")
     dt = float(input("Pas de temps (s) [valeur positive, ex: 1e-7]: ") or 1e-7)
@@ -138,7 +136,7 @@ plt.grid()
 ani = animation.FuncAnimation(fig, animate, init_func=init, frames=n_frame, blit=False, interval=intervalle, repeat=True)
 
 # Création du dossier output
-output_dir = "../output"
+output_dir = "output"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
