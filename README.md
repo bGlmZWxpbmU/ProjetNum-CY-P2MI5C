@@ -5,13 +5,13 @@
 
 Effet Ramsauer–Townsend
 
-## Contributors
+## Contributeurs
 
 - Romain MICHAUT-JOYEUX
 - Nathan CHOUPIN
 - Ziyad HADDADI
 
-## Prerequisites
+## Prérequis
 
 ## Installation
 
