@@ -150,5 +150,3 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 print("\nSimulation enregistrée avec succès.")
 print(f"\nTemps d'exécution: {elapsed_time:.2f} secondes")
-
-plt.show()
