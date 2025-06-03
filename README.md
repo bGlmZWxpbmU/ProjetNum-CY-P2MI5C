@@ -12,10 +12,9 @@
 - Nathan CHOUPIN
 - Ziyad HADDADI
 
-## Langages utilisés
+## Langage utilisé
 
-![PYTHON](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![LATEX](https://img.shields.io/badge/-LaTeX-008080?style=flat&logo=latex&logoColor=white)
-
+![PYTHON](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 ## Prérequis
 
