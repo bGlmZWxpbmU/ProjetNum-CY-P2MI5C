@@ -83,7 +83,7 @@ def simulation(dt, nt, dx, nx, xc, sigma, E, v0, x_debut, x_fin, n_frame, interv
     max_densite = np.max(final_densite)
     max_potentiel = max(np.max(V), 0)
 
-    plt.ylim(0, max(max_densite * 1.2, max_potentiel * 1.2))
+    plt.ylim(-5, max(max_densite * 1.2, max_potentiel * 1.2))
     plt.xlim(0, np.max(x_grid))
 
     # Affichage du potentiel
