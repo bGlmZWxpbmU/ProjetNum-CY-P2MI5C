@@ -24,7 +24,7 @@ def simulation(dt, nt, dx, nx, xc, sigma, E, v0, x_debut, x_fin, n_frame, interv
     e = E / v0 # Rapport E/V0
 
     # Initialisation des grilles
-    x_grid = np.linspace(0, (nx - 1) * dx, nx)  # Grille spatiale
+    x_grid = np.linspace(0, (nx - 1) * dx, nx) # Grille spatiale
     V = np.zeros(nx)  # Affichage du potentiel
 
     # Définition du potentiel dans la région spécifiée
@@ -77,17 +77,18 @@ def simulation(dt, nt, dx, nx, xc, sigma, E, v0, x_debut, x_fin, n_frame, interv
     fig = plt.figure(figsize=(12, 8))
 
     # Affichage de la densité
-    line, = plt.plot([], [], 'b-', linewidth=2, label='Densité')
+    line, = plt.plot([], [], 'b-', linewidth=3, label='Densité')
 
     # Limites d'affichage
-    max_densite = np.max(final_densite)
-    max_potentiel = max(np.max(V), 0)
+    # max_densite = np.max(final_densite)
+    # max_potentiel = max(np.max(V), 0)
+    # plt.ylim(-10, max(max_densite * 1.2, max_potentiel * 1.2))
 
-    plt.ylim(-5, max(max_densite * 1.2, max_potentiel * 1.2))
+    plt.ylim(-5, 14)
     plt.xlim(0, np.max(x_grid))
 
     # Affichage du potentiel
-    plt.plot(x_grid, V, 'orange', linewidth=3, label=f'Potentiel')
+    plt.plot(x_grid, V, 'orange', linewidth=1, label=f'Potentiel')
 
     # Labels et titre
     plt.title(plot_title)
@@ -96,7 +97,7 @@ def simulation(dt, nt, dx, nx, xc, sigma, E, v0, x_debut, x_fin, n_frame, interv
     plt.legend()
     plt.grid()
 
-    # Création de l'animation
+    # Création de la vidéo en format mp4
     ani = animation.FuncAnimation(fig, animate, init_func=init, frames=n_frame, blit=False, interval=intervalle, repeat=True)
 
     # Création du dossier output s'il n'existe pas
