@@ -44,7 +44,7 @@ Pour éxecuter le programme, lancer la commande suivante dans le répertoire du 
 
 Ensuite, vous aurez la possibilité de choisir le rapport `E/V0` pour effectuer différentes observations. Si vous souhaitez utiliser la valeur par défaut (5), il vous suffit d'appuyer sur la touche entrée de votre clavier lors de la saisie.
 
-Les vidéos et graphiques générés sont enregistrés dans le dossier `output`. S'il n'existe pas, il est crée automatiquement.
+Les vidéos et graphiques générés sont enregistrés dans le dossier `output`. S'il n'existe pas, il est créé automatiquement.
 
 ## Revue des programmes
 
