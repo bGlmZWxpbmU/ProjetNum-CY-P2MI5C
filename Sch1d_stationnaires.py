@@ -171,7 +171,7 @@ plt.legend()
 ani = animation.FuncAnimation(fig,animate,init_func=init, frames=n_frame, blit=False, interval=intervalle, repeat=False)
 file_name = f"paquet_onde_e={e}.mp4"
 file_path = os.path.join(output_dir, file_name)
-ani.save(file_name, writer = animation.FFMpegWriter(fps=15, bitrate=5000))
+ani.save(file_path, writer = animation.FFMpegWriter(fps=15, bitrate=5000))
 
 # Affichage du temps
 end_time = time.time()
