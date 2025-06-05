@@ -79,26 +79,26 @@ def calcul_transmission_lennard_jones(epsilon, sigma, dx, nx, E_min=0.1, E_max=1
     energies = np.linspace(E_min, E_max, n_points)
     transmissions = []
     
-    # Calcule l'H une seule fois AVANT la boucle
+    # Calcul du potentiel de Lennard-Jones (une seule fois)
     V_lj = 4 * epsilon * ((sigma / (np.abs(x) + 1e-10))**12 - (sigma / (np.abs(x) + 1e-10))**6)
     V_lj = np.clip(V_lj, -10*epsilon, 10*epsilon)
+
+    # Construction de l'hamiltonien (une seule fois)
     diag = np.full(nx, -2.0)
     offdiag = np.full(nx - 1, 1.0)
     T_op = (-1 / dx**2) * (np.diag(diag) + np.diag(offdiag, 1) + np.diag(offdiag, -1))
     H = T_op + np.diag(V_lj)
 
-    # Diagonalise une seule fois
+    # Diagonalisation (une seule fois)
     eigenvals, eigenvecs = eigh(H)
 
-    # Boucle seulement pour le calcul de la transmission
-    for idx, E in enumerate(energies):
+    # Boucle seulement pour comparer aux énergies
+    for E in energies:
         proche_E = np.abs(eigenvals - E)
         min_dist = np.min(proche_E)
         T = np.exp(-min_dist / (0.1 * epsilon))  # Approximation phénoménologique
         transmissions.append(T)
-        
-        if idx % 10 == 0:
-            print(f"Énergie {idx}/{n_points} (E={E:.2f}) traitée")
+
 
 
     
@@ -108,7 +108,7 @@ def calcul_transmission_lennard_jones(epsilon, sigma, dx, nx, E_min=0.1, E_max=1
     plt.xlabel("Énergie (eV)")
     plt.ylabel("Transmission T")
     plt.grid(True, alpha=0.3)
-    plt.xlim(E_min, E_max)
+    plt.xlim(0, 10 + epsilon)
     plt.ylim(0, 1.1)
     
     filepath = os.path.join("output", f"transmission_LJ_eps={epsilon}_sigma={sigma}.png")
@@ -265,5 +265,3 @@ print(f"  - Animation: {file_name}")
 print(f"  - États stationnaires: etats_stationnaires_LJ_eps={epsilon}_sigma={sigma}.png")
 print(f"  - Transmission: transmission_LJ_eps={epsilon}_sigma={sigma}.png")
 print(f"  - État final: etat_final_LJ_eps={epsilon}_sigma={sigma}.png")
-
-plt.show()
