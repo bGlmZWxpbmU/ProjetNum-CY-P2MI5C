@@ -40,7 +40,7 @@ Afin de récupérer le repos, entrez `git clone https://github.com/bGlmZWxpbmU/P
 
 ## Utilisation
 
-Pour éxecuter le programme, lancer la commande suivante dans le répertoire du projet : `python 3 Sch1d.py` ou `python 3 Sch1d_stationnaires.py`.
+Pour éxecuter le programme, lancer la commande suivante dans le répertoire du projet : `python 3 Sch1d.py`.
 
 Ensuite, vous aurez la possibilité de choisir le rapport `E/V0` pour effectuer différentes observations. Si vous souhaitez utiliser la valeur par défaut (5), il vous suffit d'appuyer sur la touche entrée de votre clavier lors de la saisie.
 
@@ -48,6 +48,12 @@ Les vidéos et graphiques générés sont enregistrés dans le dossier `output`.
 
 ## Revue des programmes
 
+`Graphes_transmission_reflexion.py` trace les courbes R(E) et T(E) en utilisant la formule de T trouvé dans la partie analytique.
+
 `Sch1d.py` est un algorithme de résolution d'équation de Schrödinger en une dimension, il simule la propagation d'un paquet d'ondes.
 
 `Sch1d_stationnaires.py` simule la propagation d'un paquet d'ondes et calcule les états stationnaires d'une particule dans un potentiel donné.
+
+`Sch1d_Lennard_Jones.py` modélise le graphe du coeff de transmission en fonction de l'énergie, en reprenant un modèle plus réaliste (en trois dimensions).
+
+`Sch1d_Lennard_Jones.py` modélise le coeff de transmission et de réflexion en fonction de la vitesse d'un éléctron.
