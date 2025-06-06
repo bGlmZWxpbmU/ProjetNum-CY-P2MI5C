@@ -74,7 +74,8 @@ def etats_stationnaires_lennard_jones(epsilon, sigma, dx, nx, n_states=5):
     return energies, states
 
 # Calculer le coefficient de transmission pour différentes énergies
-def calcul_transmission_lennard_jones(epsilon, sigma, dx, nx, E_min=0.1, E_max=10, n_points=100):
+def calcul_transmission_lennard_jones(epsilon, sigma, dx, nx, E_min=0.1, n_points=100):
+    E_max=epsilon
     x = np.linspace(-1, 1, nx)
     energies = np.linspace(E_min, E_max, n_points)
     transmissions = []
