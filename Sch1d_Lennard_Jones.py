@@ -79,45 +79,47 @@ def calcul_transmission_lennard_jones(epsilon, sigma, dx, nx, E_min=0.1, n_point
     x = np.linspace(-1, 1, nx)
     energies = np.linspace(E_min, E_max, n_points)
     transmissions = []
-    
-    # Calcul du potentiel de Lennard-Jones (une seule fois)
+    reflexions = []
+
+    # Calcul du potentiel de Lennard-Jones
     V_lj = 4 * epsilon * ((sigma / (np.abs(x) + 1e-10))**12 - (sigma / (np.abs(x) + 1e-10))**6)
     V_lj = np.clip(V_lj, -10*epsilon, 10*epsilon)
 
-    # Construction de l'hamiltonien (une seule fois)
+    # Construction de l'hamiltonien
     diag = np.full(nx, -2.0)
     offdiag = np.full(nx - 1, 1.0)
     T_op = (-1 / dx**2) * (np.diag(diag) + np.diag(offdiag, 1) + np.diag(offdiag, -1))
     H = T_op + np.diag(V_lj)
 
-    # Diagonalisation (une seule fois)
     eigenvals, eigenvecs = eigh(H)
 
-    # Boucle seulement pour comparer aux énergies
     for E in energies:
         proche_E = np.abs(eigenvals - E)
         min_dist = np.min(proche_E)
         T = np.exp(-min_dist / (0.1 * epsilon))  # Approximation phénoménologique
         transmissions.append(T)
+        R = 1 - T
+        reflexions.append(R)
 
-
-
-    
+    # Graphique Transmission et Réflexion
     plt.figure(figsize=(10, 6))
-    plt.plot(energies, transmissions, 'b-', linewidth=2)
-    plt.title("Coefficient de transmission vs Énergie (Potentiel de Lennard-Jones)")
+    plt.plot(energies, transmissions, 'b-', linewidth=2, label='Transmission T')
+    plt.plot(energies, reflexions, 'r--', linewidth=2, label='Réflexion R=1-T')
+    plt.title("Transmission et Réflexion vs Énergie (Potentiel de Lennard-Jones)")
     plt.xlabel("Énergie (eV)")
-    plt.ylabel("Transmission T")
+    plt.ylabel("Coefficient")
     plt.grid(True, alpha=0.3)
-    plt.xlim(0, 10 + epsilon)
+    plt.xlim(0, E_max)
     plt.ylim(0, 1.1)
-    
-    filepath = os.path.join("output", f"transmission_LJ_eps={epsilon}_sigma={sigma}.png")
+    plt.legend()
+
+    filepath = os.path.join("output", f"transmission_reflexion_LJ_eps={epsilon}_sigma={sigma}.png")
     plt.savefig(filepath, dpi=300, bbox_inches='tight')
-    print(f"Graphique de transmission Lennard-Jones exporté dans 'output'")
+    print(f"Graphique transmission/réflexion exporté dans 'output'")
     plt.close()
-    
-    return energies, transmissions
+
+    return energies, transmissions, reflexions
+
 
 # Initialise l'animation
 def init():
@@ -169,9 +171,9 @@ V = np.clip(V, -10*epsilon, 10*epsilon)
 print("Calcul des états stationnaires...")
 energies_stat, states_stat = etats_stationnaires_lennard_jones(epsilon, sigma, dx, nx)
 
-# Calcul du coefficient de transmission
-print("Calcul du coefficient de transmission...")
-E_range, T_range = calcul_transmission_lennard_jones(epsilon, sigma, dx, nx)
+# Calcul du coefficient de transmission et réflexion
+print("Calcul du coefficient de transmission et réflexion...")
+E_range, T_range, R_range = calcul_transmission_lennard_jones(epsilon, sigma, dx, nx)
 
 # Paquet d'ondes initial
 cpt = A * np.exp(1j * k * o - ((o - xc) ** 2) / (2 * (sigma_paquet ** 2)))
